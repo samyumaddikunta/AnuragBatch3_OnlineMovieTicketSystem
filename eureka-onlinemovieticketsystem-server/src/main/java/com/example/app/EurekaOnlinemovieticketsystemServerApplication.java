@@ -11,5 +11,5 @@ public class EurekaOnlinemovieticketsystemServerApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(EurekaOnlinemovieticketsystemServerApplication.class, args);
 	}
-
+//eureka
 }
