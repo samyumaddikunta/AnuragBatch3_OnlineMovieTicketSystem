@@ -13,4 +13,5 @@ public class InvalidBookingDetailsException extends RuntimeException
 	{
 		super(message);
 	}
+	//user
 }

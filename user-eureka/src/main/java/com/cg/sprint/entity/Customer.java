@@ -3,7 +3,7 @@ package com.cg.sprint.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-
+//user
 @Entity
 public class Customer {
 	@Id

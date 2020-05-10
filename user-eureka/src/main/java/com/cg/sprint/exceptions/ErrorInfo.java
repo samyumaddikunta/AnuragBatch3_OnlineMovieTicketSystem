@@ -1,5 +1,5 @@
 package com.cg.sprint.exceptions;
-
+//user
 public class ErrorInfo {
 private String url;
 private String message;

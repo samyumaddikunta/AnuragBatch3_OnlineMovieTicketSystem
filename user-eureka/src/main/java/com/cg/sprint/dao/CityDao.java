@@ -11,8 +11,6 @@ public interface CityDao extends JpaRepository<City, Integer>{
 	@Query("select c from City c")
 	List<City> getCityNames();
 	
-	/*@Query("select c from City c")
-	List<City> getCityList();*/
 	
 
 }

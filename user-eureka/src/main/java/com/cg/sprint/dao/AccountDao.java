@@ -11,4 +11,5 @@ public interface AccountDao extends JpaRepository<Account, Integer>{
 	public Account validate(String uname, String pass);
 	@Query("select u from Account u where username=?1 and password=?2 ")
 	public Account getUser(String uName,String uPass);	
+	//user
 }

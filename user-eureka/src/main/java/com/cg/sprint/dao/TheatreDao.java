@@ -10,9 +10,7 @@ import com.cg.sprint.entity.Theatre;
 
 public interface TheatreDao extends JpaRepository<Theatre, Integer>{
 
-	@Query("select t from Theatre t where city_name=?1")
+	@Query("select t from Theatre t where cityName=?1")
 	public List<Theatre> theatreNames(String name);
 	
-	/*@Query("select t from Theatre t")
-	List<Theatre> getTheatreList();*/
 }

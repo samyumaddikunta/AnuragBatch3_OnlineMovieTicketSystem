@@ -7,6 +7,6 @@ import com.cg.sprint.entity.Seats;
 
 public interface SeatsDao extends JpaRepository<Seats, Integer>{
 
-	@Query("select s from Seats s where seat_type=?1")
+	@Query("select s from Seats s where seatType=?1")
 	public Seats seatDetails(String s_type);
 }

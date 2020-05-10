@@ -7,7 +7,7 @@ import com.cg.sprint.entity.Customer;
 
 public interface CustomerDao extends JpaRepository<Customer, Integer>{
 
-	@Query("select c from Customer c where account_no=?1")
+	@Query("select c from Customer c where accountNo=?1")
 	public Customer getAccountData(int acc_no);
-	
+	//user
 }

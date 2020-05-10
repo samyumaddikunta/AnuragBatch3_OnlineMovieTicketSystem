@@ -105,7 +105,7 @@ public class UserController {
 	public Payments refund(@PathVariable("acc_no") int accno, @PathVariable("book_id") int bookingid) throws InvalidBookingDetailsException {
 		return movieservice.refund(accno, bookingid);
 	}
-	//updating payment
+	//updating payments
 	@PutMapping("/update_payment")
 	public String updatePayment(@RequestBody Payments payment) {
 		return movieservice.updatePayment(payment);
@@ -140,5 +140,6 @@ public class UserController {
 		String string = movieservice.updateCustomer(cus);
 		return new ResponseEntity<>(string,HttpStatus.OK);
 	}
+	//user
 
 }

@@ -185,6 +185,7 @@ public class UserEurekaApplicationTests {
 			paymentDao.deleteById(32);
 		    verify(paymentDao, times(1)).deleteById(32);
 		}
+		//user
 
 }			
 

@@ -22,4 +22,5 @@ public class UserSwagger {
 	private ApiInfo metadata() {
 	return new ApiInfoBuilder().title("Online Movie Ticket System").description("API reference guide for developers").termsOfServiceUrl("https://www....../").contact("Batra, Yatin").version("1.0").build();	
 	}
+	//user
 }

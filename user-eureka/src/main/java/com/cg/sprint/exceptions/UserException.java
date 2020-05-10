@@ -13,5 +13,5 @@ public class UserException  {
 	public ResponseEntity<Object> exception(InvalidBookingDetailsException exception) {
 	      return new ResponseEntity<>("invalid booking details", HttpStatus.NOT_FOUND);
 	   }
-	
+	//user	
 }

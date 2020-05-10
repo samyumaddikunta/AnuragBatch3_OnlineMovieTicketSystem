@@ -13,6 +13,4 @@ public interface ShowsDao extends JpaRepository<Shows, Integer>{
 
 	List<Shows> getShows();
     
-	/*@Query("select a from Shows a")
-	List<Shows> getShowList();*/
-}
+	}
