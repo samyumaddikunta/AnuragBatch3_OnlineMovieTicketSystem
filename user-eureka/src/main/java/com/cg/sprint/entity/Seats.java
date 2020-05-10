@@ -12,29 +12,41 @@ public class Seats {
 	@Column(length = 1)
 	private int sno;
 	@Column(length = 10)
-	private String seat_type;
+	private String seatType;
 	@Column(length = 3)
-	private int available_seats;
+	private int availableSeats;
 	@Column(length = 4)
 	private int price;
 	
+	public Seats() {
+		super();
+	}
+	
+	public Seats(int sno, String seatType, int availableSeats, int price) {
+		super();
+		this.sno = sno;
+		this.seatType = seatType;
+		this.availableSeats = availableSeats;
+		this.price = price;
+	}
+
 	public int getSno() {
 		return sno;
 	}
 	public void setSno(int sno) {
 		this.sno = sno;
 	}
-	public String getSeat_type() {
-		return seat_type;
+	public String getSeatType() {
+		return seatType;
 	}
-	public void setSeat_type(String seat_type) {
-		this.seat_type = seat_type;
+	public void setSeatType(String seatType) {
+		this.seatType = seatType;
 	}
-	public int getAvailable_seats() {
-		return available_seats;
+	public int getAvailableSeats() {
+		return availableSeats;
 	}
-	public void setAvailable_seats(int available_seats) {
-		this.available_seats = available_seats;
+	public void setAvailableSeats(int availableSeats) {
+		this.availableSeats = availableSeats;
 	}
 	public int getPrice() {
 		return price;

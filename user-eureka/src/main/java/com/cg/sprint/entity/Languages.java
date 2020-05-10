@@ -14,6 +14,16 @@ public class Languages {
 	@Column(length = 10)
 	private String language;
 	
+	public Languages() {
+		super();
+	}
+	
+	public Languages(int sno, String language) {
+		super();
+		this.sno = sno;
+		this.language = language;
+	}
+
 	public int getSno() {
 		return sno;
 	}

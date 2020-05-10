@@ -3,28 +3,26 @@ package com.cg.sprint.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "customer")
 public class Customer {
 	@Id
 	@Column(length = 4)
-	private int account_no;
+	private int accountNo;
 	@Column(length = 20)
 	private String name;
 	@Column(length = 10)
-	private int current_balance;
+	private int currentBalance;
 	@Column(length = 20)
 	private String username;
 	@Column(length = 15)
 	private String password;
 	
-	public int getAccount_no() {
-		return account_no;
+	public int getAccountNo() {
+		return accountNo;
 	}
-	public void setAccount_no(int account_no) {
-		this.account_no = account_no;
+	public void setAccountNo(int accountNo) {
+		this.accountNo = accountNo;
 	}
 	public String getName() {
 		return name;
@@ -32,11 +30,11 @@ public class Customer {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getCurrent_balance() {
-		return current_balance;
+	public int getCurrentBalance() {
+		return currentBalance;
 	}
-	public void setCurrent_balance(int current_balance) {
-		this.current_balance = current_balance;
+	public void setCurrentBalance(int currentBalance) {
+		this.currentBalance = currentBalance;
 	}
 	public String getUsername() {
 		return username;

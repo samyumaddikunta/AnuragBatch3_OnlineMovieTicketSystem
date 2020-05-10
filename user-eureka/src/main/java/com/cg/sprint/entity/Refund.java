@@ -15,13 +15,13 @@ public class Refund {
 	@GeneratedValue
 	private int sno;
 	@Column(length = 4)
-	private int account_no;
+	private int accountNo;
 	@Column(length = 5)
-	private int money_refunded;
+	private int moneyRefunded;
 	@Column(length = 10)
-	private int booking_id;
+	private int bookingId;
 	@Column(length = 10)
-	private String date_of_refund;
+	private String dateOfRefund;
 
 	public int getSno() {
 		return sno;
@@ -29,28 +29,28 @@ public class Refund {
 	public void setSno(int sno) {
 		this.sno = sno;
 	}
-	public int getAccount_no() {
-		return account_no;
+	public int getAccountNo() {
+		return accountNo;
 	}
-	public void setAccount_no(int account_no) {
-		this.account_no = account_no;
+	public void setAccountNo(int accountNo) {
+		this.accountNo = accountNo;
 	}
-	public int getMoney_refunded() {
-		return money_refunded;
+	public int getMoneyRefunded() {
+		return moneyRefunded;
 	}
-	public void setMoney_refunded(int money_refunded) {
-		this.money_refunded = money_refunded;
+	public void setMoneyRefunded(int moneyRefunded) {
+		this.moneyRefunded = moneyRefunded;
 	}
-	public int getBooking_id() {
-		return booking_id;
+	public int getBookingId() {
+		return bookingId;
 	}
-	public void setBooking_id(int booking_id) {
-		this.booking_id = booking_id;
+	public void setBookingId(int bookingId) {
+		this.bookingId = bookingId;
 	}
-	public String getDate_of_refund() {
-		return date_of_refund;
+	public String getDateOfRefund() {
+		return dateOfRefund;
 	}
-	public void setDate_of_refund(String date_of_refund) {
-		this.date_of_refund = date_of_refund;
+	public void setDateOfRefund(String dateOfRefund) {
+		this.dateOfRefund = dateOfRefund;
 	}
 }

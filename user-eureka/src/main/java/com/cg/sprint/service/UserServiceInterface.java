@@ -31,6 +31,5 @@ public interface UserServiceInterface {
 	String refundDetails(Refund ref);
 	Seats seatDetails(String s_type);
 	String setSeats(Seats seat);
-	//Account getUser(String uName,String uPass);
-	
+	String updateCustomer(Customer cus);	
 }

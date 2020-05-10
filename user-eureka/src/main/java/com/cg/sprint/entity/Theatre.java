@@ -10,28 +10,39 @@ import javax.persistence.Table;
 public class Theatre {
 	@Id
 	@Column(length = 3)
-	private int theatre_id;
+	private int theatreId;
 	@Column(length = 10)
-	private String city_name;
-	@Column(name = "theatre_name", length = 10)
-	private String theatre_name;
+	private String cityName;
+	@Column(name = "theatreName", length = 10)
+	private String theatreName;
 	
-	public int getTheatre_id() {
-		return theatre_id;
+	public Theatre() {
+		super();
 	}
-	public void setTheatre_id(int theatre_id) {
-		this.theatre_id = theatre_id;
+	
+	public Theatre(int theatreId, String cityName, String theatreName) {
+		super();
+		this.theatreId = theatreId;
+		this.cityName = cityName;
+		this.theatreName = theatreName;
 	}
-	public String getCity_name() {
-		return city_name;
+
+	public int getTheatreId() {
+		return theatreId;
 	}
-	public void setCity_name(String city_name) {
-		this.city_name = city_name;
+	public void setTheatreId(int theatreId) {
+		this.theatreId = theatreId;
 	}
-	public String getTheatre_name() {
-		return theatre_name;
+	public String getCityName() {
+		return cityName;
 	}
-	public void setTheatre_name(String theatre_name) {
-		this.theatre_name = theatre_name;
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+	public String getTheatreName() {
+		return theatreName;
+	}
+	public void setTheatreName(String theatreName) {
+		this.theatreName = theatreName;
 	}	
 }

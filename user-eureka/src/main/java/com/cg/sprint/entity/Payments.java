@@ -13,49 +13,65 @@ public class Payments {
 	@Id
 	@Column(length = 5	)
 	@GeneratedValue
-	private int booking_id;
+	private int bookingId;
 	@Column(length = 4)
-	private int account_no;
+	private int accountNo;
 	@Column(length = 5)
-	private int money_collected;
+	private int moneyCollected;
 	@Column(length = 3)
-	private int seats_booked;
+	private int seatsBooked;
 	@Column(length = 10)
-	private String seat_type;
+	private String seatType;
 	@Column(length = 5)
 	private int refund;
 	@Column(length = 10)
-	private String date_of_transac;
+	private String dateOfTransac;
 
-	public int getBooking_id() {
-		return booking_id;
+	public Payments() {
+		super();
 	}
-	public void setBooking_id(int booking_id) {
-		this.booking_id = booking_id;
+	
+	public Payments(int bookingId, int accountNo, int moneyCollected, int seatsBooked, String seatType, int refund,
+			String dateOfTransac) {
+		super();
+		this.bookingId = bookingId;
+		this.accountNo = accountNo;
+		this.moneyCollected = moneyCollected;
+		this.seatsBooked = seatsBooked;
+		this.seatType = seatType;
+		this.refund = refund;
+		this.dateOfTransac = dateOfTransac;
 	}
-	public int getAccount_no() {
-		return account_no;
+
+	public int getBookingId() {
+		return bookingId;
 	}
-	public void setAccount_no(int account_no) {
-		this.account_no = account_no;
+	public void setBookingId(int bookingId) {
+		this.bookingId = bookingId;
 	}
-	public int getMoney_collected() {
-		return money_collected;
+	public int getAccountNo() {
+		return accountNo;
 	}
-	public void setMoney_collected(int money_collected) {
-		this.money_collected = money_collected;
+	public void setAccountNo(int accountNo) {
+		this.accountNo = accountNo;
 	}
-	public int getSeats_booked() {
-		return seats_booked;
+	public int getMoneyCollected() {
+		return moneyCollected;
 	}
-	public void setSeats_booked(int seats_booked) {
-		this.seats_booked = seats_booked;
+	public void setMoneyCollected(int moneyCollected) {
+		this.moneyCollected = moneyCollected;
 	}
-	public String getSeat_type() {
-		return seat_type;
+	public int getSeatsBooked() {
+		return seatsBooked;
 	}
-	public void setSeat_type(String seat_type) {
-		this.seat_type = seat_type;
+	public void setSeatsBooked(int seatsBooked) {
+		this.seatsBooked = seatsBooked;
+	}
+	public String getSeatType() {
+		return seatType;
+	}
+	public void setSeatType(String seatType) {
+		this.seatType = seatType;
 	}
 	public int getRefund() {
 		return refund;
@@ -63,10 +79,10 @@ public class Payments {
 	public void setRefund(int refund) {
 		this.refund = refund;
 	}
-	public String getDate_of_transac() {
-		return date_of_transac;
+	public String getDateOfTransac() {
+		return dateOfTransac;
 	}
-	public void setDate_of_transac(String date_of_transac) {
-		this.date_of_transac = date_of_transac;
+	public void setDateOfTransac(String dateOfTransac) {
+		this.dateOfTransac = dateOfTransac;
 	}
 }

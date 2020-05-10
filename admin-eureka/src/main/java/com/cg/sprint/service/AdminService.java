@@ -7,37 +7,34 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-//import com.cap.anurag.entity.User;
-//import com.cg.sprint.dao.AccountDao;
+
+
 import com.cg.sprint.dao.AdminDao;
 import com.cg.sprint.dao.CityDao;
-//import com.cg.sprint.dao.CustomerDao;
-//import com.cg.sprint.dao.LanguagesDao;
+
+
 import com.cg.sprint.dao.MoviesDao;
-//import com.cg.sprint.dao.PaymentDao;
-//import com.cg.sprint.dao.RefundDao;
-//import com.cg.sprint.dao.SeatsDao;
+
 import com.cg.sprint.dao.ShowsDao;
 import com.cg.sprint.dao.TheatreDao;
-//import com.cg.sprint.entity.Account;
+
 import com.cg.sprint.entity.Admin;
 import com.cg.sprint.entity.City;
-//import com.cg.sprint.entity.Customer;
-//import com.cg.sprint.entity.Languages;
+
+
 import com.cg.sprint.entity.Movies;
-//import com.cg.sprint.entity.Payments;
-//import com.cg.sprint.entity.Refund;
-//import com.cg.sprint.entity.Seats;
+
+
+
 import com.cg.sprint.entity.Shows;
 import com.cg.sprint.entity.Theatre;
+import com.cg.sprint.exceptions.IdNotFoundException;
 
 @Service
 @Transactional
 public class AdminService implements AdminServiceInterface  {
 
-	/*@Autowired
-	private AccountDao validation;*/
-	@Autowired
+		@Autowired
 	private CityDao city;
 	@Autowired
 	private TheatreDao theatre;
@@ -45,21 +42,10 @@ public class AdminService implements AdminServiceInterface  {
 	private MoviesDao movie;
 	@Autowired
 	private ShowsDao shows;
-	/*@Autowired
-	private LanguagesDao language;
-	@Autowired
-	private SeatsDao seats;
-	@Autowired
-	private CustomerDao account;
-	@Autowired 
-	private PaymentDao payment;
-	@Autowired
-	private RefundDao refund;*/
 	@Autowired
 	private AdminDao admin;
 	
-	//@Autowired
-	//private UserDao user;
+	
 	 
 
 	//Login of an admin  
@@ -107,19 +93,20 @@ public class AdminService implements AdminServiceInterface  {
 	
 	@Override
 	public String updateCity(City c) {
-		boolean bool = city.existsById(c.getSno());
-		if(bool == true) {
+	if(city.existsById(c.getSno()))
+				{
 			city.save(c);
 			return "cities were updated successfully!!";
-		}
+				}
 		else {
 			return "sorry, cities were not updated";
+			//return throw new IdNotFoundException;
 		}
+		
 	}
 	@Override
 	public String updateTheatre(Theatre t) {
-		boolean bool = theatre.existsById(t.getTheatre_id());
-		if(bool == true) {
+		if(theatre.existsById(t.getTheatreId())) {
 			theatre.save(t);
 			return "theatres were updated successfully!!";
 		}
@@ -129,8 +116,7 @@ public class AdminService implements AdminServiceInterface  {
 	}
 	@Override
 	public String updateMovies(Movies m) {
-		boolean bool = movie.existsById(m.getMovie_id());
-		if(bool == true) {
+		if(movie.existsById(m.getMovieId())) {
 			movie.save(m);
 			return "movies were updated successfully!!";
 		}
@@ -140,8 +126,7 @@ public class AdminService implements AdminServiceInterface  {
 	}
 	@Override
 	public String updateShows(Shows s) {
-		boolean bool = shows.existsById(s.getSno());
-		if(bool == true) {
+		if(shows.existsById(s.getSno())) {
 			shows.save(s);
 			return "shows were updated successfully!!";
 		}
@@ -155,14 +140,14 @@ public class AdminService implements AdminServiceInterface  {
    	  city.deleteById(sno);
     }
     @Override
-    public void removeTheatre(int theatre_id)
+    public void removeTheatre(int theatreId)
     {
-   	  theatre.deleteById(theatre_id);
+   	  theatre.deleteById(theatreId);
     }
     @Override
-    public void removeMovie(int movie_id)
+    public void removeMovie(int movieId)
     {
-   	  movie.deleteById(movie_id);
+   	  movie.deleteById(movieId);
     }
     @Override
     public void removeShow(int sno)

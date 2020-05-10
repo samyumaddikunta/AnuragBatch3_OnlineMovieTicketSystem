@@ -28,20 +28,13 @@ import com.cg.sprint.entity.Refund;
 import com.cg.sprint.entity.Seats;
 import com.cg.sprint.entity.Shows;
 import com.cg.sprint.entity.Theatre;
-import com.cg.sprint.exceptions.AccountNotFoundException;
+import com.cg.sprint.exceptions.InvalidBookingDetailsException;
+import com.cg.sprint.exceptions.UserAccountNotFoundException;
 import com.cg.sprint.service.UserServiceInterface;
 @RequestMapping("/user")
 @RestController
 @CrossOrigin("http://localhost:4200")
-public class UserController {
-	//controller level exception handling
-		@ResponseStatus(value=HttpStatus.NOT_FOUND,reason="controller account is not present")
-		@ExceptionHandler({Exception.class})
-		public void handleException()
-		{
-			
-		}
-		
+public class UserController {		
 	@Autowired
 	private UserServiceInterface movieservice;
 	//Signup Details
@@ -54,7 +47,7 @@ public class UserController {
 
 	//Login Details
 	@GetMapping("/validation/{username}/{password}")
-	public ResponseEntity<Account> validate(@PathVariable("username") String uname, @PathVariable("password") String pwd) throws AccountNotFoundException{
+	public ResponseEntity<Account> validate(@PathVariable("username") String uname, @PathVariable("password") String pwd) throws UserAccountNotFoundException{
 		Account auth = movieservice.validate(uname, pwd);
 		ResponseEntity<Account> response = new ResponseEntity<Account>(auth,HttpStatus.OK);
 		return response;
@@ -62,38 +55,32 @@ public class UserController {
 	//displaying cities
 	@GetMapping("/cities")
 	public List<City> cityNames(){
-		List<City> list = movieservice.getCityNames();
-		return list;
+		return movieservice.getCityNames();
 	}
 	//displaying theaters
 	@GetMapping("/theatres/{city-name}")
 	public List<Theatre> theatreNames(@PathVariable("city-name") String name){
-		List<Theatre> list = movieservice.theatreNames(name);
-		return list;
+		return movieservice.theatreNames(name);
 	}
 	//displaying movies
 	@GetMapping("/movies/{theatre-name}")
 	public List<Movies> movieNames(@PathVariable("theatre-name") String name){
-		List<Movies> list = movieservice.movieNames(name);
-		return list;
+		return movieservice.movieNames(name);
 	}
 	//displaying shows
 	@GetMapping("/shows")
 	public List<Shows> getShows(){
-		List<Shows> list = movieservice.getShows();
-		return list;
+		return movieservice.getShows();
 	}
 	//displaying languages
 	@GetMapping("/languages")
 	public List<Languages> getLanguage(){
-		List<Languages> list = movieservice.getLanguage();
-		return list;
+		return movieservice.getLanguage();
 	}
 	//displaying seats
 	@GetMapping("/seats")
 	public List<Seats> getSeats(){
-		List<Seats> list = movieservice.getSeats();
-		return list;
+		return movieservice.getSeats();
 	}
 	//fetching account number
 	@GetMapping("/account_data/{account_no}")
@@ -105,47 +92,53 @@ public class UserController {
 	//updating seats
 	@PutMapping("/update_seats")
 	public String updateSeats(@RequestBody Seats seat) {
-		String string = movieservice.updateSeats(seat);
-		return string;
+		
+		return movieservice.updateSeats(seat);
 	}
 	//payment details
 	@PostMapping("/payments") 
 	public String payments(@RequestBody Payments pay) {
-		String string = movieservice.payments(pay); 
-		return string; 
+		return movieservice.payments(pay);
 	}
-	/*@PostMapping("/userregister") 
-	public String getUser(@RequestBody User us) {
-		String string = movieservice.getUser(us); 
-		return string; 
-	}
-*/
 	//refund details
 	@GetMapping("/refund/{acc_no}/{book_id}")
-	public Payments refund(@PathVariable("acc_no") int accno, @PathVariable("book_id") int bookingid) throws AccountNotFoundException {
+	public Payments refund(@PathVariable("acc_no") int accno, @PathVariable("book_id") int bookingid) throws InvalidBookingDetailsException {
 		return movieservice.refund(accno, bookingid);
 	}
 	//updating payment
 	@PutMapping("/update_payment")
 	public String updatePayment(@RequestBody Payments payment) {
-		String string = movieservice.updatePayment(payment);
-		return string;
+		return movieservice.updatePayment(payment);
 	}
 	//refund details
 	@PostMapping("/refund_details")
 	public String refundDetails(@RequestBody Refund refund) {
-		String string = movieservice.refundDetails(refund);
-		return string;
+		return movieservice.refundDetails(refund);
 	}
 	//seats information
 	@GetMapping("/seat_details/{seat_type}")
 	public Seats seatDetails(@PathVariable("seat_type") String seattype) {
 		return movieservice.seatDetails(seattype);
 	}
-	//updating seats
-	@PutMapping("/set_seats")
-	public String setSeats(@RequestBody Seats seat) {
+		@PutMapping("/set_seats")
+	public String setSeats(@RequestBody Seats seat )   
+	{
 		String string = movieservice.setSeats(seat);
-		return string;
+		if(string!=null)
+		{
+			return "updated successfully!"+"Sno"+seat.getSno()+"seattype"+seat.getSeatType()+"seats available"+seat.getAvailableSeats()+"price"+seat.getPrice();
+		}
+		else
+		{
+			
+			return "seats not updated";
+		}
 	}
+	@PutMapping("/update_customer")
+	public ResponseEntity<String> updateCustomer(@RequestBody Customer cus) //throws InvalidDetailsException
+	{
+		String string = movieservice.updateCustomer(cus);
+		return new ResponseEntity<>(string,HttpStatus.OK);
+	}
+
 }

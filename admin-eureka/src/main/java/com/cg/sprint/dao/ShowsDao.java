@@ -9,9 +9,7 @@ import com.cg.sprint.entity.City;
 import com.cg.sprint.entity.Shows;
 
 public interface ShowsDao extends JpaRepository<Shows, Integer>{
-	/*@Query("select a from Shows a ")
-
-	List<Shows> getShows();*/
+	
     
 	@Query("select a from Shows a")
 	List<Shows> getShowList();

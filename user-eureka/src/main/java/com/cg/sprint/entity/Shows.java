@@ -15,6 +15,18 @@ public class Shows {
 	private String timings;
 	@Column(length = 10)
 	private String show;
+	
+	public Shows() {
+		super();
+	}
+	
+	public Shows(int sno, String timings, String show) {
+		super();
+		this.sno = sno;
+		this.timings = timings;
+		this.show = show;
+	}
+
 	public int getSno() {
 		return sno;
 	}

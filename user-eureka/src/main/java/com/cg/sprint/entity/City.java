@@ -12,27 +12,38 @@ public class City {
 	@Column(length = 2)
 	private int sno;
 	@Column(length = 2)
-	private int cityid;
+	private int cityId;
 	@Column(length = 10)
-	private String citynames;
+	private String cityNames;
 	
+	public City() {
+		super();
+	}
+	
+	public City(int sno, int cityId, String cityNames) {
+		super();
+		this.sno = sno;
+		this.cityId = cityId;
+		this.cityNames = cityNames;
+	}
+
 	public int getSno() {
 		return sno;
 	}
 	public void setSno(int sno) {
 		this.sno = sno;
 	}
-	public int getCityid() {
-		return cityid;
+	public int getCityId() {
+		return cityId;
 	}
-	public void setCityid(int cityid) {
-		this.cityid = cityid;
+	public void setCityId(int cityId) {
+		this.cityId = cityId;
 	}
-	public String getCitynames() {
-		return citynames;
+	public String getCityNames() {
+		return cityNames;
 	}
-	public void setCitynames(String citynames) {
-		this.citynames = citynames;
+	public void setCityNames(String cityNames) {
+		this.cityNames = cityNames;
 	}
 	
 }

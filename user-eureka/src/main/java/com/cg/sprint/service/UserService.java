@@ -7,7 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-//import com.cap.anurag.entity.User;
+
 import com.cg.sprint.dao.AccountDao;
 import com.cg.sprint.dao.CityDao;
 import com.cg.sprint.dao.CustomerDao;
@@ -53,8 +53,6 @@ public class UserService implements UserServiceInterface  {
 	private PaymentDao payment;
 	@Autowired
 	private RefundDao refund;
-	//@Autowired
-	//private UserDao user;
 	//sign up
 	@Override
 	public Account save(Account a)
@@ -76,14 +74,12 @@ public class UserService implements UserServiceInterface  {
 	
 	@Override
 	public List<Theatre> theatreNames(String name) {
-	List<Theatre> list = theatre.theatreNames(name);
-	return list;
+	return theatre.theatreNames(name);
 	}
 	//Displaying movie names
 	@Override
 	public List<Movies> movieNames(String name) {
-		List<Movies> list = movie.movieNames(name);
-		return list;
+		return movie.movieNames(name);
 	}
 	//Displaying shows list
 	public List<Shows> getShows() {
@@ -93,30 +89,22 @@ public class UserService implements UserServiceInterface  {
 	//Displaying languages
 	@Override
 	public List<Languages> getLanguage() {
-		List<Languages> list = language.findAll();
-		return list;
+		return language.findAll();
 	}
 	//Displaying seats
 	@Override
 	public List<Seats> getSeats() {
-		List<Seats> list = seats.findAll();
-		return list;
+		return seats.findAll();
 	}
 	//Fetching Account number 
 	@Override
 	public Customer getAccountData(int acc_no) {
 		return account.getAccountData(acc_no);
-	}
-	/*@Override
-	public Account getUser(String uName,String uPass) {
-		return account.getUser(uName,uPass);
-	}*/
-	
+	}	
 	//Updating seats
 	@Override
 	public String updateSeats(Seats seat_obj) {
-		boolean bool = seats.existsById(seat_obj.getSno());
-		if(bool == true) {
+		if(seats.existsById(seat_obj.getSno())) {
 			seats.save(seat_obj);
 			return "seats were updated successfully!!";
 		}
@@ -127,19 +115,18 @@ public class UserService implements UserServiceInterface  {
 	//Payment details
 	  @Override public String payments(Payments pay) { 
 		  payment.save(pay); 
-		  int id = pay.getBooking_id();
+		  int id = pay.getBookingId();
 		  return "your booking id is : "+id;
 	  }
 	  //Refund details
 	@Override
-	public Payments refund(int accountno, int bookingid) {
-		return payment.refund(accountno, bookingid);
+	public Payments refund(int accountNo, int bookingId) {
+		return payment.refund(accountNo, bookingId);
 	}
 	//Updating payment table
 	@Override
 	public String updatePayment(Payments pay) {
-		boolean bool = payment.existsById(pay.getBooking_id());
-		if(bool == true) {
+		if(payment.existsById(pay.getBookingId())) {
 			payment.save(pay);
 			return "payment details updated successfully!!";
 		}
@@ -161,8 +148,7 @@ public class UserService implements UserServiceInterface  {
 	//Updating seats after refund
 	@Override
 	public String setSeats(Seats seat) {
-		boolean bool = seats.existsById(seat.getSno());
-		if(bool == true) {
+		if(seats.existsById(seat.getSno())) {
 			seats.save(seat);
 			return "seats updated successfully!!";
 		}
@@ -170,4 +156,21 @@ public class UserService implements UserServiceInterface  {
 			return "Sorry!!seats were not updated.";
 		}
 	}
+	//updating customer balance after refund
+			@Override
+			public String updateCustomer(Customer cus) //throws InvalidDetailsException
+			{
+				boolean bool = account.existsById(cus.getAccountNo());
+				if(bool){
+					account.save(cus);
+					return "the customer table was updated successfully..!!";
+				}
+				
+				else
+				{
+					//throw new InvalidDetailsException("sorry, customer table was not updated..!!");
+					return "sorry, customer table was not updated..!!";
+				}
+			}
+
 }
