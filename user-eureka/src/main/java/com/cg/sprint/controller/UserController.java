@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.sprint.entity.Account;
+
 import com.cg.sprint.entity.City;
 import com.cg.sprint.entity.Customer;
 import com.cg.sprint.entity.Languages;
@@ -36,94 +37,106 @@ import com.cg.sprint.service.UserServiceInterface;
 @CrossOrigin("http://localhost:4200")
 public class UserController {		
 	@Autowired
-	private UserServiceInterface movieservice;
+	private UserServiceInterface userservice;
 	//Signup Details
 	@PostMapping("/signup")
     public Account addUser(@Valid @RequestBody Account a)
     {
-   	 return movieservice.save(a);
-   	
+   	 return userservice.save(a);   	
     }
-
 	//Login Details
 	@GetMapping("/validation/{username}/{password}")
 	public ResponseEntity<Account> validate(@PathVariable("username") String uname, @PathVariable("password") String pwd) throws UserAccountNotFoundException{
-		Account auth = movieservice.validate(uname, pwd);
-		ResponseEntity<Account> response = new ResponseEntity<Account>(auth,HttpStatus.OK);
-		return response;
+		Account auth = userservice.validate(uname, pwd);
+		ResponseEntity<Account> responseEntity = null;
+	    if (auth == null) {
+	        throw new UserAccountNotFoundException();
+	    }
+	    responseEntity = new ResponseEntity<Account>(auth,HttpStatus.OK);
+	    return responseEntity;
 	}
 	//displaying cities
 	@GetMapping("/cities")
 	public List<City> cityNames(){
-		return movieservice.getCityNames();
+		return userservice.getCityNames();
 	}
 	//displaying theaters
 	@GetMapping("/theatres/{city-name}")
 	public List<Theatre> theatreNames(@PathVariable("city-name") String name){
-		return movieservice.theatreNames(name);
+		return userservice.theatreNames(name);
 	}
 	//displaying movies
 	@GetMapping("/movies/{theatre-name}")
 	public List<Movies> movieNames(@PathVariable("theatre-name") String name){
-		return movieservice.movieNames(name);
+		return userservice.movieNames(name);
 	}
 	//displaying shows
 	@GetMapping("/shows")
 	public List<Shows> getShows(){
-		return movieservice.getShows();
+		return userservice.getShows();
 	}
 	//displaying languages
 	@GetMapping("/languages")
 	public List<Languages> getLanguage(){
-		return movieservice.getLanguage();
+		return userservice.getLanguage();
 	}
 	//displaying seats
 	@GetMapping("/seats")
 	public List<Seats> getSeats(){
-		return movieservice.getSeats();
+		return userservice.getSeats();
 	}
 	//fetching account number
 	@GetMapping("/account_data/{account_no}")
 	public ResponseEntity<Customer> getAccountData(@PathVariable("account_no") int accno) {
-		Customer customer = movieservice.getAccountData(accno);
+		Customer customer = userservice.getAccountData(accno);
 		ResponseEntity<Customer> response = new ResponseEntity<Customer>(customer,HttpStatus.OK);
 		return response;
 	}
 	//updating seats
 	@PutMapping("/update_seats")
-	public String updateSeats(@RequestBody Seats seat) {
-		
-		return movieservice.updateSeats(seat);
+	public String updateSeats(@RequestBody Seats seat) {		
+		return userservice.updateSeats(seat);
 	}
 	//payment details
 	@PostMapping("/payments") 
 	public String payments(@RequestBody Payments pay) {
-		return movieservice.payments(pay);
+		return userservice.payments(pay);
 	}
 	//refund details
+	/*@GetMapping("/refund/{acc_no}/{book_id}")
+	public Payments refund(@PathVariable("acc_no") int accno, @PathVariable("book_id") int bookingid) throws InvalidBookingDetailsException {
+		return userservice.refund(accno, bookingid);
+	}*/
 	@GetMapping("/refund/{acc_no}/{book_id}")
 	public Payments refund(@PathVariable("acc_no") int accno, @PathVariable("book_id") int bookingid) throws InvalidBookingDetailsException {
-		return movieservice.refund(accno, bookingid);
+		Payments details=userservice.refund(accno, bookingid);
+	 if(details==null) {
+		 throw new InvalidBookingDetailsException();
+	 }
+	 else {
+		 return details;
+	 }
 	}
-	//updating payments
+	
+	//updating payment
 	@PutMapping("/update_payment")
 	public String updatePayment(@RequestBody Payments payment) {
-		return movieservice.updatePayment(payment);
+		return userservice.updatePayment(payment);
 	}
 	//refund details
 	@PostMapping("/refund_details")
 	public String refundDetails(@RequestBody Refund refund) {
-		return movieservice.refundDetails(refund);
+		return userservice.refundDetails(refund);
 	}
 	//seats information
 	@GetMapping("/seat_details/{seat_type}")
 	public Seats seatDetails(@PathVariable("seat_type") String seattype) {
-		return movieservice.seatDetails(seattype);
+		return userservice.seatDetails(seattype);
 	}
 		@PutMapping("/set_seats")
 	public String setSeats(@RequestBody Seats seat )   
 	{
-		String string = movieservice.setSeats(seat);
+		String string = userservice.setSeats(seat);
 		if(string!=null)
 		{
 			return "updated successfully!"+"Sno"+seat.getSno()+"seattype"+seat.getSeatType()+"seats available"+seat.getAvailableSeats()+"price"+seat.getPrice();
@@ -137,9 +150,8 @@ public class UserController {
 	@PutMapping("/update_customer")
 	public ResponseEntity<String> updateCustomer(@RequestBody Customer cus) //throws InvalidDetailsException
 	{
-		String string = movieservice.updateCustomer(cus);
+		String string = userservice.updateCustomer(cus);
 		return new ResponseEntity<>(string,HttpStatus.OK);
 	}
-	//user
 
 }
