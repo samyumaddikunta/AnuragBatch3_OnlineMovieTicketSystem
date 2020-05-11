@@ -41,9 +41,14 @@ public class AdminController {
 	@GetMapping("/admin-validation/{username}/{password}")
 	public ResponseEntity<Admin> aLogin(@PathVariable("username") String uname, @PathVariable("password") String pwd) throws AdminAccountNotFoundException{
 		Admin auth = adminservice.aLogin(uname, pwd);
-		ResponseEntity<Admin> response = new ResponseEntity<Admin>(auth,HttpStatus.OK);
-		return response;
+		ResponseEntity<Admin> responseEntity = null;
+	    if (auth == null) {
+	        throw new AdminAccountNotFoundException();
+	    }
+	    responseEntity = new ResponseEntity<Admin>(auth,HttpStatus.OK);
+	    return responseEntity;
 	}
+		
 	@PostMapping("/addcity")
     public City addCity(@Valid @RequestBody City c)
     {

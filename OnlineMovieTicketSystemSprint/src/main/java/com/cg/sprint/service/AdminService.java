@@ -51,16 +51,7 @@ public class AdminService implements AdminServiceInterface  {
 	@Autowired
 	private SeatsDao seats;
 	@Autowired
-	private CustomerDao account;
-	@Autowired 
-	private PaymentDao payment;
-	@Autowired
-	private RefundDao refund;
-	@Autowired
 	private AdminDao admin;
-	
-	
-	 
 
 	//Login of an admin  
 	@Override
@@ -102,9 +93,7 @@ public class AdminService implements AdminServiceInterface  {
 	@Override
 	public List<Shows> getShowList() {
 		return shows.getShowList();
-	}
-	
-	
+	}	
 	@Override
 	public String updateCity(City c) {
 	if(city.existsById(c.getSno()))
@@ -114,7 +103,6 @@ public class AdminService implements AdminServiceInterface  {
 				}
 		else {
 			return "sorry, cities were not updated";
-			//return throw new IdNotFoundException;
 		}
 		
 	}
@@ -151,21 +139,33 @@ public class AdminService implements AdminServiceInterface  {
     @Override
     public void removeCity(int sno)
     {
+    	if(!city.existsById(sno)){
+    		  throw new IdNotFoundException();
+    		}
    	  city.deleteById(sno);
     }
     @Override
     public void removeTheatre(int theatreId)
     {
+    	if(!theatre.existsById(theatreId)){
+  		  throw new IdNotFoundException();
+  		}
    	  theatre.deleteById(theatreId);
     }
     @Override
     public void removeMovie(int movieId)
     {
+    	if(!movie.existsById(movieId)){
+  		  throw new IdNotFoundException();
+  		}
    	  movie.deleteById(movieId);
     }
     @Override
     public void removeShow(int sno)
     {
+    	if(!shows.existsById(sno)){
+  		  throw new IdNotFoundException();
+  		}
    	  shows.deleteById(sno);
     }
 	
